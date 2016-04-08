@@ -120,7 +120,7 @@ then
     mkdir -p "$env_dir"
     env_dir=$(cd "$env_dir/" && pwd)
     ln -sfn $build /app/code
-  for key in CGO_CFLAGS CGO_CPPFLAGS CGO_CXXFLAGS CGO_LDFLAGS GO_LINKER_SYMBOL GO_LINKER_VALUE GO15VENDOREXPERIMENT GOVERSION PKG_CONFIG_PATH
+  for key in CGO_CFLAGS CGO_CPPFLAGS CGO_CXXFLAGS CGO_LDFLAGS GO_LINKER_SYMBOL GO_LINKER_VALUE GO15VENDOREXPERIMENT GOVERSION
     do
         if [ -f "$env_dir/$key" ]
         then
@@ -128,6 +128,9 @@ then
         fi
     done
 fi
+
+export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:$HOME/vendor/vips/lib/pkgconfig"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME/vendor/vips/lib"
 
 if test -f "$build/Godeps/Godeps.json"
 then
